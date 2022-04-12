@@ -8,7 +8,9 @@ const Footer: React.FunctionComponent<IFooterProps> = (props) => {
   return (
     <Container>
       <Row>
-        <Col>Blob Store by Ibrahim | Copyright 2022</Col>
+        <Col className="text-center">
+          <h4>Blob Store by Ibrahim | 2022</h4>
+        </Col>
       </Row>
     </Container>
   );

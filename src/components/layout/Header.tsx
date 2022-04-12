@@ -7,8 +7,10 @@ interface IHeaderProps {}
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   return (
     <Navbar expand="lg" variant="light" bg="light">
-      <Container>
-        <Navbar.Brand href="/">Blob Store</Navbar.Brand>
+      <Container className="justify-content-center">
+        <Navbar.Brand href="/">
+          <h1>Blob Store</h1>
+        </Navbar.Brand>
       </Container>
     </Navbar>
   );

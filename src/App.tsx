@@ -1,6 +1,6 @@
-import FormComponent from "./components/Form";
 import Layout from "./components/layout";
 import GlobalStyle from "./globalStyles";
+import Home from "./pages/home";
 import { Theme, ThemeProvider } from "./theme";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Layout>
-        <FormComponent />
+        <Home />
       </Layout>
     </ThemeProvider>
   );

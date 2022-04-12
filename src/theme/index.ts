@@ -1,11 +1,7 @@
 import COLORS from "./color";
 import * as styledComponents from "styled-components";
 import * as Breakpoints from "./breakpoints";
-
-interface ITheme extends styledComponents.DefaultTheme {
-  colors: object;
-  breakpoints: object;
-}
+import { ITheme } from "../utils/interface";
 
 const Theme: ITheme = {
   colors: {
