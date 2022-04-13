@@ -7,10 +7,10 @@ import {
   Form,
   Button,
 } from "react-bootstrap";
-import styled, { Breakpoints, css } from "../theme";
-import { IThemeProp } from "../utils/interface";
+import styled, { Breakpoints, css } from "../../theme";
+import { iOptions, IThemeProp } from "../../utils/interface";
 
-const FormWrapper = styled.div`
+const FormWrapper = styled(Form)`
   button {
     width: 100%;
     padding: 0.75rem 0;
@@ -20,9 +20,14 @@ const FormWrapper = styled.div`
       width: 2em;
       height: 2em;
     }
+    > input#primaryColor {
+      &.form-control:valid {
+        width: 5rem;
+      }
+    }
   }
   div.form-switch {
-    > input#dark-mode-switch {
+    > input#darkMode {
       width: 6em;
       height: 2em;
       &.form-check-input:checked,
@@ -68,26 +73,49 @@ const FormWrapper = styled.div`
   )}
 `;
 
-interface IFormComponentProps {}
+interface IFormComponentProps {
+  formData: iOptions;
+  validated: boolean;
+  handleChange: (e: any) => void;
+  handleSubmit: (e: any) => void;
+}
 
-const FormComponent: React.FunctionComponent<IFormComponentProps> = (props) => {
+const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
+  formData,
+  validated,
+  handleChange,
+  handleSubmit,
+}) => {
   return (
-    <FormWrapper className="my-5">
+    <FormWrapper
+      noValidate
+      validated={validated}
+      onSubmit={handleSubmit}
+      className="my-5"
+    >
       <Container>
-        <Row className="g-5">
+        <Row className="g-4">
           <Col sm={6}>
             <FloatingLabel controlId="dataLayer" label="Data Layer">
               <Form.Control
                 type="text"
                 name="dataLayer"
+                value={formData.dataLayer}
                 placeholder="Data Layer"
+                onChange={handleChange}
               />
             </FloatingLabel>
           </Col>
           <Col sm={6}>
-            <FloatingLabel controlId="dismissType" label="Dismiss Type">
-              <Form.Select aria-label="Dismiss Type">
-                <option>Select Dismiss Type</option>
+            <FloatingLabel controlId="dismissType" label="Dismiss Type *">
+              <Form.Select
+                name="dismissType"
+                defaultValue={formData.dismissType}
+                aria-label="Dismiss Type"
+                onChange={handleChange}
+                required
+              >
+                <option disabled>Select Dismiss Type</option>
                 <option value="cross">Cross</option>
                 <option value="cross-faint">Cross Faint</option>
                 <option value="text">Text</option>
@@ -96,7 +124,11 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = (props) => {
           </Col>
           <Col sm={6}>
             <FloatingLabel controlId="closeType" label="Close Type">
-              <Form.Select aria-label="Close Type">
+              <Form.Select
+                name="closeType"
+                aria-label="Close Type"
+                onChange={handleChange}
+              >
                 <option>Select Close Type</option>
                 <option value="cross">Cross</option>
                 <option value="tab">Tab</option>
@@ -104,52 +136,70 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = (props) => {
             </FloatingLabel>
           </Col>
           <Col sm={6} md={3}>
-            <FloatingLabel controlId="borderRadius" label="Border Radius">
+            <FloatingLabel controlId="borderRadius" label="Border Radius *">
               <Form.Control
                 type="number"
                 name="borderRadius"
-                defaultValue={6}
+                value={formData.borderRadius}
                 placeholder="Border Radius"
                 min={0}
+                onChange={handleChange}
+                required
               />
             </FloatingLabel>
           </Col>
           <Col sm={6} md={3}>
-            <FloatingLabel controlId="expiration" label="Expiration">
+            <FloatingLabel controlId="expiration" label="Expiration *">
               <Form.Control
                 type="number"
                 name="expiration"
-                defaultValue={365}
+                value={formData.expiration}
                 placeholder="Expiration"
                 min={0}
+                onChange={handleChange}
+                required
               />
             </FloatingLabel>
           </Col>
         </Row>
         <Row className="g-5 my-1">
           <Col xs={4}>
-            <Form.Label htmlFor="primaryColor">Primary Colour</Form.Label>
+            <Form.Label htmlFor="primaryColor">Primary Colour *</Form.Label>
             <Form.Control
               type="color"
-              id="primaryColour"
-              defaultValue="#563d7c"
+              id="primaryColor"
+              name="primaryColor"
+              value={formData.primaryColor}
               title="Choose your color"
+              onChange={handleChange}
+              required
             />
           </Col>
           <Col xs={4}>
-            <Form.Label htmlFor="dismissable">Dismissable</Form.Label>
-            <Form.Check type="checkbox" id="dismissable" />
+            <Form.Label htmlFor="dismissable">Dismissable *</Form.Label>
+            <Form.Check
+              type="checkbox"
+              name="dismissable"
+              id="dismissable"
+              onChange={handleChange}
+              feedback="This is required!"
+              feedbackType="invalid"
+              required
+            />
           </Col>
           <Col xs={4}>
-            <Form.Label htmlFor="dark-mode-switch">Dark Mode</Form.Label>
-            <Form.Check type="switch" id="dark-mode-switch" />
+            <Form.Label htmlFor="darkMode">Dark Mode</Form.Label>
+            <Form.Check
+              type="switch"
+              name="darkMode"
+              id="darkMode"
+              onChange={handleChange}
+            />
           </Col>
         </Row>
         <Row className="gy-5 my-2">
           <Col sm={6} md={4}>
-            <Button variant="primary" type="submit">
-              Reset
-            </Button>
+            <Button variant="primary">Reset</Button>
           </Col>
           <Col sm={6} md={4}>
             <Button variant="primary" type="submit">
@@ -157,9 +207,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = (props) => {
             </Button>
           </Col>
           <Col sm={6} md={4}>
-            <Button variant="primary" type="submit">
-              Download
-            </Button>
+            <Button variant="primary">Download</Button>
           </Col>
         </Row>
       </Container>

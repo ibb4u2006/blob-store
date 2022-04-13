@@ -47,6 +47,10 @@ export interface iOptions {
   closeType?: "cross" | "tab";
 }
 
+export interface IFormStatusState {
+  validated: boolean;
+}
+
 export interface IThemeProp {
   [x: string]: ITheme;
 }
