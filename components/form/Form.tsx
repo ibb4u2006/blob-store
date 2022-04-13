@@ -112,7 +112,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
             <FloatingLabel controlId="dismissType" label="Dismiss Type *">
               <Form.Select
                 name="dismissType"
-                defaultValue={formData.dismissType}
+                value={formData.dismissType}
                 aria-label="Dismiss Type"
                 onChange={handleChange}
                 required
@@ -129,6 +129,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
               <Form.Select
                 name="closeType"
                 aria-label="Close Type"
+                value={formData.closeType}
                 onChange={handleChange}
               >
                 <option>Select Close Type</option>
@@ -183,6 +184,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
               type="checkbox"
               name="dismissable"
               id="dismissable"
+              checked={formData.dismissable}
               onChange={handleChange}
               feedback="This is required!"
               feedbackType="invalid"
@@ -195,6 +197,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
               type="switch"
               name="darkMode"
               id="darkMode"
+              checked={formData.darkMode}
               onChange={handleChange}
             />
           </Col>

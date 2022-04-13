@@ -1,4 +1,4 @@
-import { Breakpoints, createGlobalStyle, css } from "./theme";
+import { Breakpoints, createGlobalStyle, css } from "../theme";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const GlobalStyle = createGlobalStyle`

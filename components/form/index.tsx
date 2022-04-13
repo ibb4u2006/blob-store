@@ -9,6 +9,7 @@ const initialState: iOptions = {
   dismissable: false,
   darkMode: false,
   dismissType: "text",
+  closeType: "cross",
   expiration: 365,
 };
 
