@@ -3,9 +3,11 @@ import { IFormStatusState, iOptions } from "../../utils/interface";
 import FormComponent from "./Form";
 
 const initialState: iOptions = {
+  dataLayer: "Data Layer",
   primaryColor: "#f98305",
   borderRadius: 6,
   dismissable: false,
+  darkMode: false,
   dismissType: "text",
   expiration: 365,
 };
@@ -40,11 +42,16 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = (props) => {
     }
   };
 
+  const handleFormReset = () => {
+    setFormInputData(initialState);
+  };
+
   return (
     <FormComponent
       formData={formInputData}
       handleChange={handleInputChange}
       handleSubmit={handleFormSubmission}
+      handleReset={handleFormReset}
       validated={formStatusData.validated}
     />
   );

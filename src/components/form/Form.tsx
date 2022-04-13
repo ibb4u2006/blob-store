@@ -78,6 +78,7 @@ interface IFormComponentProps {
   validated: boolean;
   handleChange: (e: any) => void;
   handleSubmit: (e: any) => void;
+  handleReset: (e: any) => void;
 }
 
 const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
@@ -85,6 +86,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
   validated,
   handleChange,
   handleSubmit,
+  handleReset,
 }) => {
   return (
     <FormWrapper
@@ -199,7 +201,9 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
         </Row>
         <Row className="gy-5 my-2">
           <Col sm={6} md={4}>
-            <Button variant="primary">Reset</Button>
+            <Button variant="primary" onClick={handleReset}>
+              Reset
+            </Button>
           </Col>
           <Col sm={6} md={4}>
             <Button variant="primary" type="submit">
