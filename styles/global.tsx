@@ -1,5 +1,6 @@
 import { Breakpoints, createGlobalStyle, css } from "../theme";
 import "bootstrap/dist/css/bootstrap.min.css";
+import formStyles from "./form";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -63,7 +64,6 @@ ${Breakpoints.mediaBreakpointDown(
     }
   `
 )}
-
 `;
 
 export default GlobalStyle;

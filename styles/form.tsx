@@ -1,8 +1,7 @@
-import { Form } from "react-bootstrap";
-import styled, { Breakpoints, css } from "../../theme";
-import { IThemeProp } from "../../utils/interface";
+import { Breakpoints, createGlobalStyle, css } from "../theme";
+import { IThemeProp } from "../utils/interface";
 
-export const FormWrapper = styled(Form)`
+const FormStyles = createGlobalStyle`
   button {
     width: 100%;
     padding: 0.75rem 0;
@@ -64,3 +63,5 @@ export const FormWrapper = styled(Form)`
     `
   )}
 `;
+
+export default FormStyles;

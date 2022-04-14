@@ -1,6 +1,7 @@
 import * as React from "react";
 import initialState from "../../data/initialState";
 import { colorRgbaToHex } from "../../helpers/colors";
+import FormStyles from "../../styles/form";
 import {
   fetchDataFromLocal,
   postDataToLocal,
@@ -78,15 +79,18 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = (props) => {
   };
 
   return (
-    <FormComponent
-      formData={formInputData}
-      handleChange={handleInputChange}
-      handleSubmit={handleFormSubmission}
-      handleReset={handleFormReset}
-      validated={formStatusData.validated}
-      loading={formStatusData.loading}
-      submitted={formStatusData.submitted}
-    />
+    <>
+      <FormStyles />
+      <FormComponent
+        formData={formInputData}
+        handleChange={handleInputChange}
+        handleSubmit={handleFormSubmission}
+        handleReset={handleFormReset}
+        validated={formStatusData.validated}
+        loading={formStatusData.loading}
+        submitted={formStatusData.submitted}
+      />
+    </>
   );
 };
 
