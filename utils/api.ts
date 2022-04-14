@@ -1,8 +1,9 @@
 import { iOptions } from "./interface";
+import fileDownload from "js-file-download";
 
 export const fetchDataFromLocal = async () => {
   try {
-    const response = await fetch("/api/blob");
+    const response = await fetch("/api/options");
     if (response.ok) {
       const dataFromFile = await response.json();
       return dataFromFile;
@@ -15,7 +16,7 @@ export const fetchDataFromLocal = async () => {
 
 export const postDataToLocal = async (data: iOptions) => {
   try {
-    const response = await fetch("/api/blob", {
+    const response = await fetch("/api/options", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,4 +52,9 @@ export const putDataToRemote = async (data: iOptions) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const downloadUpdatedData = async (fileName: string) => {
+  const data = await fetchDataFromLocal();
+  return fileDownload(JSON.stringify(data), fileName);
 };

@@ -1,6 +1,10 @@
 import * as React from "react";
 import initialState from "../../data/initialState";
-import { postDataToLocal, putDataToRemote } from "../../utils/api";
+import {
+  fetchDataFromLocal,
+  postDataToLocal,
+  putDataToRemote,
+} from "../../utils/api";
 import { IFormStatusState, iOptions } from "../../utils/interface";
 import FormComponent from "./Form";
 
@@ -17,13 +21,8 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = (props) => {
 
   React.useEffect(() => {
     (async () => {
-      const response = await fetch("/api/blob");
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-      const dataFromFile = await response.json();
+      const dataFromFile = await fetchDataFromLocal();
       setFormInputData(dataFromFile);
-      return dataFromFile;
     })();
   }, []);
 

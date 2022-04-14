@@ -7,9 +7,9 @@ export default function handler(
   res: NextApiResponse<any>
 ) {
   if (req.method === "POST") {
-    fs.writeFileSync("./data/blob.json", JSON.stringify(req.body));
+    fs.writeFileSync("./data/options.json", JSON.stringify(req.body));
     return res.status(200).json(req.body);
   }
-  const updatedBlob = fs.readFileSync("./data/blob.json");
+  const updatedBlob = fs.readFileSync("./data/options.json");
   res.status(200).json(updatedBlob);
 }
