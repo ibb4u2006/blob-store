@@ -36,9 +36,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start entering value to the input fields. Click on `Update` button to update the local and remote options json file with the form data.
 
-options.json location:
+The `Reset` button will initialise the form data to a static predefined values, you can find the values in the project at `data/initialState.ts`
 
-- You can find the Local json file at `data/options.json`
+The `Download` button will download the updated form data to your local device
+
+`options.json` location:
+
+- You can find the Local json file in the project at `data/options.json`
 - You can find the remote json file at [https://frontendrecruitment.blob.core.windows.net/ibrahim/assets/options.json](https://frontendrecruitment.blob.core.windows.net/ibrahim/assets/options.json)
 
 ## Learn More
