@@ -9,81 +9,18 @@ import {
   Spinner,
   Alert,
 } from "react-bootstrap";
-import styled, { Breakpoints, css } from "../../theme";
 import { downloadUpdatedData } from "../../utils/api";
-import { iOptions, IThemeProp } from "../../utils/interface";
-
-const FormWrapper = styled(Form)`
-  button {
-    width: 100%;
-    padding: 0.75rem 0;
-  }
-  div {
-    > input#dismissable {
-      width: 2em;
-      height: 2em;
-    }
-    > input#primaryColor {
-      &.form-control:valid {
-        width: 5rem;
-      }
-    }
-  }
-  div.form-switch {
-    > input#darkMode {
-      width: 6em;
-      height: 2em;
-      &.form-check-input:checked,
-      &.form-check-input:checked:focus {
-        border-color: ${(props: IThemeProp) => props.theme.colors.dark};
-        background-color: ${(props: IThemeProp) => props.theme.colors.dark};
-        background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%23fff%27/%3e%3c/svg%3e");
-      }
-      &.form-check-input:focus {
-        background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27rgba%280, 0, 0, 0.25%29%27/%3e%3c/svg%3e");
-      }
-      &.form-check-input,
-      &.form-check-input:focus {
-        border-color: ${(props: IThemeProp) => props.theme.colors.darkGrey};
-        box-shadow: none;
-      }
-    }
-  }
-  ${Breakpoints.mediaBreakpointUp(
-    Breakpoints.WIDTHS.lg,
-    css`
-      .container {
-        padding: 0 10rem;
-      }
-    `
-  )}
-  ${Breakpoints.mediaBreakpointBetween(
-    Breakpoints.WIDTHS.xs,
-    Breakpoints.WIDTHS.sm,
-    css`
-      .container {
-        padding: 0 3rem;
-      }
-    `
-  )}
-  ${Breakpoints.mediaBreakpointDown(
-    Breakpoints.WIDTHS.sm,
-    css`
-      button {
-        width: 100%;
-      }
-    `
-  )}
-`;
+import { iOptions } from "../../utils/interface";
+import { FormWrapper } from "./Wrapper";
 
 interface IFormComponentProps {
   formData: iOptions;
   validated: boolean;
   loading: boolean;
   submitted: boolean;
-  handleChange: (e: any) => void;
-  handleSubmit: (e: any) => void;
-  handleReset: (e: any) => void;
+  handleChange: (event: any) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleReset: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
@@ -109,7 +46,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
               <Form.Control
                 type="text"
                 name="dataLayer"
-                value={formData.dataLayer}
+                value={formData.dataLayer || ""}
                 placeholder="Data Layer"
                 onChange={handleChange}
               />
@@ -119,12 +56,14 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
             <FloatingLabel controlId="dismissType" label="Dismiss Type *">
               <Form.Select
                 name="dismissType"
-                value={formData.dismissType}
+                value={formData.dismissType || ""}
                 aria-label="Dismiss Type"
                 onChange={handleChange}
                 required
               >
-                <option disabled>Select Dismiss Type</option>
+                <option value="" disabled>
+                  Select Dismiss Type
+                </option>
                 <option value="cross">Cross</option>
                 <option value="cross-faint">Cross Faint</option>
                 <option value="text">Text</option>
@@ -136,10 +75,10 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
               <Form.Select
                 name="closeType"
                 aria-label="Close Type"
-                value={formData.closeType}
+                value={formData.closeType || ""}
                 onChange={handleChange}
               >
-                <option>Select Close Type</option>
+                <option value="">Select Close Type</option>
                 <option value="cross">Cross</option>
                 <option value="tab">Tab</option>
               </Form.Select>
@@ -150,7 +89,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
               <Form.Control
                 type="number"
                 name="borderRadius"
-                value={formData.borderRadius}
+                value={formData.borderRadius || 0}
                 placeholder="Border Radius"
                 min={0}
                 onChange={handleChange}
@@ -163,7 +102,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
               <Form.Control
                 type="number"
                 name="expiration"
-                value={formData.expiration}
+                value={formData.expiration || 0}
                 placeholder="Expiration"
                 min={0}
                 onChange={handleChange}
@@ -179,7 +118,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
               type="color"
               id="primaryColor"
               name="primaryColor"
-              value={formData.primaryColor}
+              value={formData.primaryColor || ""}
               title="Choose your color"
               onChange={handleChange}
               required
@@ -191,7 +130,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
               type="checkbox"
               name="dismissable"
               id="dismissable"
-              checked={formData.dismissable}
+              checked={formData.dismissable || false}
               onChange={handleChange}
               feedback="This is required!"
               feedbackType="invalid"
@@ -204,7 +143,7 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
               type="switch"
               name="darkMode"
               id="darkMode"
-              checked={formData.darkMode}
+              checked={formData.darkMode || false}
               onChange={handleChange}
             />
           </Col>

@@ -1,5 +1,6 @@
 import * as React from "react";
 import initialState from "../../data/initialState";
+import { colorRgbaToHex } from "../../helpers/colors";
 import {
   fetchDataFromLocal,
   postDataToLocal,
@@ -22,11 +23,14 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = (props) => {
   React.useEffect(() => {
     (async () => {
       const dataFromFile = await fetchDataFromLocal();
-      setFormInputData(dataFromFile);
+      setFormInputData({
+        ...dataFromFile,
+        primaryColor: colorRgbaToHex(dataFromFile.primaryColor),
+      });
     })();
   }, []);
 
-  const handleInputChange = (event: any) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
@@ -36,7 +40,7 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = (props) => {
     }));
   };
 
-  const handleFormSubmission = (event: any) => {
+  const handleFormSubmission = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     setFormStatusData((prev: IFormStatusState) => ({
@@ -68,7 +72,8 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = (props) => {
     }
   };
 
-  const handleFormReset = () => {
+  const handleFormReset = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event?.preventDefault();
     setFormInputData(initialState);
   };
 

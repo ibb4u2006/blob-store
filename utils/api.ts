@@ -1,5 +1,6 @@
 import { iOptions } from "./interface";
 import fileDownload from "js-file-download";
+import { filterData } from "../helpers/data";
 
 export const fetchDataFromLocal = async () => {
   try {
@@ -21,7 +22,7 @@ export const postDataToLocal = async (data: iOptions) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(filterData(data)),
     });
     if (response.ok) {
       return await response.json();
@@ -42,7 +43,7 @@ export const putDataToRemote = async (data: iOptions) => {
           "Content-Type": "application/json",
           "x-ms-blob-type": "BlockBlob",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(filterData(data)),
       }
     );
     if (response.ok) {
