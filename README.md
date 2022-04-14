@@ -14,6 +14,12 @@ Go to the project directory:
 cd blob-store
 ```
 
+Copy and insert the environment variables:
+
+```bash
+cp .env.local.example .env.local
+```
+
 ## Getting Started
 
 Install the project:
