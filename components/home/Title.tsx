@@ -8,7 +8,7 @@ const Title: React.FunctionComponent<ITitleProps> = (props) => {
     <Container>
       <Row>
         <Col className="mt-5 text-center">
-          <h1>JSON Generator for Blob Storage</h1>
+          <h1>JSON Generator and Blob Storage</h1>
         </Col>
       </Row>
     </Container>

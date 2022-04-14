@@ -1,5 +1,5 @@
 import * as React from "react";
-import initialState from "../../data/initialState";
+import { initialState } from "../../data/initialState";
 import { colorRgbaToHex } from "../../helpers/colors";
 import FormStyles from "../../styles/form";
 import {
@@ -24,10 +24,7 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = (props) => {
   React.useEffect(() => {
     (async () => {
       const dataFromFile = await fetchDataFromLocal();
-      setFormInputData({
-        ...dataFromFile,
-        primaryColor: colorRgbaToHex(dataFromFile.primaryColor),
-      });
+      setFormInputData(dataFromFile);
     })();
   }, []);
 
