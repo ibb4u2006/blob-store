@@ -1,8 +1,30 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Clone the app
+
+First, clone from git repository:
+
+```bash
+git clone https://github.com/ibb4u2006/blob-store.git
+```
+
+Go to the project directory:
+
+```bash
+cd blob-store
+```
+
 ## Getting Started
 
-First, run the development server:
+Install the project:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -12,23 +34,23 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+You can start entering value to the input fields. Click on `Update` button to update the local and remote options json file with the form data.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+options.json location:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- You can find the Local json file at `data/options.json`
+- You can find the remote json file at [https://frontendrecruitment.blob.core.windows.net/ibrahim/assets/options.json](https://frontendrecruitment.blob.core.windows.net/ibrahim/assets/options.json)
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about this app, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Options API Route - [http://localhost:3000/api/options](http://localhost:3000/api/options)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Tech Stack :
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Next.Js: To perform some server-side functionality, like writing to and reading from file system, create api routes etc
+- React.Js: UI Library
+- React Bootstrap and Bootstrap: CSS Library
+- Styled Components: For CSS in Javascript/Typescript functionality
+- Typescript: For static typing support
