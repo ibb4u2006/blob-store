@@ -22,6 +22,20 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = (props) => {
   const [formInputData, setFormInputData] =
     React.useState<iOptions>(initialState);
 
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/api/blob");
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const dataFromFile = await response.json();
+      setFormInputData(dataFromFile);
+      return dataFromFile;
+    };
+    fetchData();
+  }, []);
+
   const handleInputChange = (event: any) => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -40,11 +54,27 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = (props) => {
       event.stopPropagation();
     } else {
       console.log(formInputData);
+      postFormInputData();
     }
   };
 
   const handleFormReset = () => {
     setFormInputData(initialState);
+  };
+
+  const postFormInputData = async () => {
+    const response = await fetch("/api/blob", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formInputData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return await response.json();
   };
 
   return (
