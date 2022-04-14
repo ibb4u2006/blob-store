@@ -49,7 +49,6 @@ The `Download` button will download the updated form data to your local device
 `options.json` location:
 
 - You can find the Local json file in the project at `data/options.json`
-- You can find the remote json file at [https://frontendrecruitment.blob.core.windows.net/ibrahim/assets/options.json](https://frontendrecruitment.blob.core.windows.net/ibrahim/assets/options.json)
 
 ## Learn More
 
