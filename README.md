@@ -60,7 +60,7 @@ To learn more about this app, take a look at the following resources:
 Tech Stack :
 
 - Next.Js: To perform some server-side functionality, like writing to and reading from file system, create api routes etc
-- React.Js: UI Library
+- React.Js: Frontend Javascript Library
 - React Bootstrap and Bootstrap: CSS Library
 - Styled Components: For CSS in Javascript/Typescript functionality
 - Typescript: For static typing support
