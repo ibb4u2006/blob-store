@@ -6,8 +6,11 @@ import {
   Row,
   Form,
   Button,
+  Spinner,
+  Alert,
 } from "react-bootstrap";
 import styled, { Breakpoints, css } from "../../theme";
+import { fetchDataFromLocal } from "../../utils/api";
 import { iOptions, IThemeProp } from "../../utils/interface";
 
 const FormWrapper = styled(Form)`
@@ -76,6 +79,8 @@ const FormWrapper = styled(Form)`
 interface IFormComponentProps {
   formData: iOptions;
   validated: boolean;
+  loading: boolean;
+  submitted: boolean;
   handleChange: (e: any) => void;
   handleSubmit: (e: any) => void;
   handleReset: (e: any) => void;
@@ -84,6 +89,8 @@ interface IFormComponentProps {
 const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
   formData,
   validated,
+  loading,
+  submitted,
   handleChange,
   handleSubmit,
   handleReset,
@@ -203,19 +210,42 @@ const FormComponent: React.FunctionComponent<IFormComponentProps> = ({
           </Col>
         </Row>
         <Row className="gy-5 my-2">
-          <Col sm={6} md={4}>
-            <Button variant="primary" onClick={handleReset}>
-              Reset
+          {loading ? (
+            <Button className="ms-auto me-auto w-25" disabled>
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                className="me-3"
+              />
+              Loading...
             </Button>
-          </Col>
-          <Col sm={6} md={4}>
-            <Button variant="primary" type="submit">
-              Update
-            </Button>
-          </Col>
-          <Col sm={6} md={4}>
-            <Button variant="primary">Download</Button>
-          </Col>
+          ) : (
+            <>
+              <Col sm={6} md={4}>
+                <Button variant="primary" onClick={handleReset}>
+                  Reset
+                </Button>
+              </Col>
+              <Col sm={6} md={4}>
+                <Button variant="primary" type="submit">
+                  Update
+                </Button>
+              </Col>
+              <Col sm={6} md={4}>
+                <Button variant="primary">Download</Button>
+              </Col>
+              <Alert
+                className="ms-auto me-auto text-center w-50"
+                show={submitted}
+                variant="success"
+              >
+                <p>Your data was updated successfully!</p>
+              </Alert>
+            </>
+          )}
         </Row>
       </Container>
     </FormWrapper>

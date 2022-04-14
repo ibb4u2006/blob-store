@@ -49,6 +49,8 @@ export interface iOptions {
 
 export interface IFormStatusState {
   validated: boolean;
+  loading: boolean;
+  submitted: boolean;
 }
 
 export interface IThemeProp {
